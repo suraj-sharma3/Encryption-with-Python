@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encrypt Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffdfd;
+        }
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, button {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        function setAction(action) {
+            document.getElementById("calcForm").action = action;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Two Numbers</h1>
+        <form id="calcForm" method="post">
+            <label for="num1">Number 1</label>
+            <input type="text" id="num1" name="num1" value="{{ num1 }}" required>
+            <label for="num2">Number 2</label>
+            <input type="text" id="num2" name="num2" value="{{ num2 }}" required>
+            <div class="buttons">
+                <button type="submit" onclick="setAction('/add')">Add</button>
+                <button type="submit" onclick="setAction('/multiply')">Multiply</button>
+                <button type="submit" onclick="setAction('/encrypt')">Encrypt</button>
+            </div>
+        </form>
+    </div>
+    <div class="container result-container">
+        {% if result_add is not none %}
+            <div class="result"><h3>Addition Result : {{ result_add }}</h3></div>
+        {% endif %}
+        {% if result_multiply is not none %}
+            <div class="result"><h3>Multiplication Result : {{ result_multiply }}</h3></div>
+        {% endif %}
+    </div>
+    
+</body>
+</html>
+ 

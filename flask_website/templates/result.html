@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+        }
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+        function setAction(action) {
+            document.getElementById("calcForm").action = action;
+        }
+
+        function goBack() {
+            window.location.href = "/";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <button class="link-button" onclick="goBack()">Go Back</button>
+        <h1>Results</h1>
+        <p>Encrypted Numbers</p>
+        <input type="text" id="cip_num1" value="{{ cip_num1 }}" readonly>
+        <input type="text" id="cip_num2" value="{{ cip_num2 }}" readonly>
+        <div class="buttons">
+            <form action="/decrypt" method="POST">
+                <button type="submit", name = >Decrypt Numbers</button>
+            </form>
+            <form action="/add_encrypted" method="POST">
+                <button type="submit">Add Encrypted Numbers</button>
+            </form>
+            <form action="/multiply_encrypted" method="POST">
+                <button type="submit">Multiply Encrypted Numbers</button>
+            </form>
+        </div>
+    </div>
+    <div class="container"> 
+        <h1>Decrypted Numbers</h1>
+        <h3>Decrypted Number 1 : {{ decrypted_value_1 }}</h3>
+        <h3>Decrypted Number 2 : {{ decrypted_value_2 }}</h3>
+    </div>
+    <div class="container">
+        <h4>Homomorphic Addition</h4>
+        <p>Result of Addition of Encrypted Numbers</p>
+        <input type="text" value="{{ result_add_encrypted_cip }}" readonly>
+        <form action="/decrypt_add" method="POST">
+            <button type="submit">Decrypt Addition Result</button>
+        </form>
+        {% if decrypted_add_result is not none %}
+            <h5>Decrypted Addition Result : {{ decrypted_add_result }}</h5>
+        {% endif %}
+    </div>
+    <div class="container">
+        <h4>Homomorphic Multiplication</h4>
+        <p>Result of Multiplication of Encrypted Numbers</p>
+        <input type="text" value="{{ result_multiply_encrypted_cip }}" readonly>
+        <form action="/decrypt_multiply" method="POST">
+            <button type="submit">Decrypt Multiplication Result</button>
+        </form>
+        {% if decrypted_multiply_result is not none %}
+            <h5>Decrypted Multiplication Result : {{ decrypted_multiply_result }}</h5>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+
